@@ -10,9 +10,9 @@
             padding:0;
         }
         #c1{
-            height:1200px;
+            height:400px;
             background-color: #ddd;
-            line-height: 1200px;
+            line-height: 400px;
             text-align: center;
         }
     </style>
@@ -23,24 +23,18 @@
     child frame
 </div>
 <script>
-   var div1=document.getElementById("c1");
-   var i=1;
-   Pigeon.reportHeight();
-   Pigeon.receiveEvent('click',div1,function(data){
-       div1.innerHTML=i++;
-       console.log(data);
-   },'scroll');
-   Pigeon.receiveEvent("mouseenter",div1,function(){
-       div1.innerHTML="click" +i++;
-   },'click');
-  /* var Pigeon1=new Pigeon({iframeName:'pigeon-iframe1'});
+    /*报告iframe1的高度*/
+   var Pigeon1=new Pigeon({iframeName:'pigeon-iframe1'});
    Pigeon1.reportHeight();
-   var div1=document.getElementById("c1"),i=0;
-   Pigeon1.receiveEvent("scroll",div1,function(){
-       console.log("iframe receive scroll event");
-       i+=1;
-       div1.innerHTML=i;
-   });*/
+
+    /*接收来自父组件的事件*/
+    var i=1;
+    Pigeon1.receiveEvent('scroll',document.getElementById('c1'),function(data){
+       //console.log(data);
+        document.getElementById("c1").innerHTML="你已经滚动了"+i+++"次";
+    })
+    /*向父组件发送事件*/
+    Pigeon1.reportEvent("click",document.getElementById("c1"));
 </script>
 </body>
 </html>

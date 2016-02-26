@@ -10,9 +10,9 @@
             padding:0;
         }
         #c1{
-            height:200px;
+            height:800px;
             background-color: greenyellow;
-            line-height: 200px;
+            line-height: 800px;
             text-align: center;
         }
     </style>
@@ -23,12 +23,17 @@
     child frame
 </div>
 <script>
-   /* var Pigeon2=new Pigeon({iframeName:'pigeon-iframe2'});
-    Pigeon2.reportHeight(2000);
-    var div1=document.getElementById("c1"),i=0;
-    Pigeon2.receiveEvent("click",div1,function(data){
-        console.log(data);
-    });*/
+var Pigeon2=new Pigeon({iframeName:'pigeon-iframe2'});
+    Pigeon2.reportHeight();
+
+
+    var i=1;
+    Pigeon2.receiveEvent('click',document.getElementById("c1"),function(data){
+        //console.log(data);
+        document.getElementById('c1').innerHTML="你已经点击了父窗口的标题和本窗口"+i+++"次"
+    });
+
+    Pigeon2.reportEvent("mouseover",document.getElementById("c1"));
 </script>
 </body>
 </html>

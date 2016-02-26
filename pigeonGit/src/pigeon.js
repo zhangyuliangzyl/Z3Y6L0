@@ -274,6 +274,8 @@
         reportEvent:function(eventType,eventTarget,type){
             var xpc=this.xpc;
             var j=0;
+            var opts = this.options,
+                win = opts.isParent ? "father" : opts.iframeName;
             /*防止重复绑定*/
             if(typeof hasBinded=='undefined')var hasBinded={};
             if(!hasBinded[eventType]){
@@ -289,7 +291,8 @@
                                 type:type || 'triggerEvent',
                                 data: {
                                     eventOrigin:eventTarget.toString(),
-                                    eventType: eventType
+                                    eventType: eventType,
+                                    from:win
                                 } || null,
                                 pigeon:true
                             });
@@ -308,6 +311,7 @@
         * */
          receiveEvent:function(eventType,eventTarget,handler,OriginType,type){
             var type=type||'triggerEvent';
+             var options = this.options;
             var originType=OriginType||eventType;
             this.receive(type,function(data){
                 var eventObj=data.data;
@@ -317,7 +321,7 @@
                     if(!hasBinded[eventType]){
                         /*本原生绑定*/
                         createEvents(eventTarget);
-                        addEvent(eventTarget,eventType,handler);
+                        if(!options.isParent){addEvent(eventTarget,eventType,handler)}
                         /*消息传递机制中绑定*/
                         eventTarget.on(eventType, handler);
                         hasBinded[eventType]=true;
@@ -339,7 +343,11 @@
 				height = getHeight();
 			}			
 			if(height != frameHeight){
-				this.report('heightChange', height);
+                var heightData={
+                    height:height,
+                    iframeName:options.iframeName
+                };
+				this.report('heightChange',heightData);
 				frameHeight = height;
 			}
 		},
