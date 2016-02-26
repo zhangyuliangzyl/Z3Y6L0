@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="pigeon.js"></script>
+
+</head>
+<body>
+<h1 id="id1">father frame</h1>
+<iframe id="pigeon-frame1" name="pigeon-iframe" src="child_frame.html" frameborder="0" width="100%"></iframe>
+
+
+
+<script>
+    var i=0;
+    Pigeon.receive("heightChange",function(data){
+       var iframeHeight=data.data;
+       var iframe=document.getElementById("pigeon-frame1");
+       iframe.height=iframeHeight;
+    });
+    Pigeon.reportEvent('scroll',window);
+    Pigeon.reportEvent('click',document.getElementById("id1"));
+    /*(function(){
+        var Pigeon1=new Pigeon({pigeonName:'pigeon-iframe1'});
+        Pigeon1.receive("heightChange",function(data){
+            var iframeHeight=data.data+"px";
+            document.getElementById("pigeon-frame1").height=iframeHeight;
+        });
+        Pigeon1.reportEvent('scroll',window);
+    })();*/
+   /* (function(){
+        var Pigeon2=new Pigeon({pigeonName:'pigeon-iframe2'});
+        Pigeon2.receive('heightChange',function(data){
+            var iframeHeight=data.data+"px";
+            document.getElementById("pigeon-frame2").height=iframeHeight;
+        });
+        Pigeon2.reportEvent('click',document.getElementById("id1"));
+    }());*/
+</script>
+
+</body>
+</html>
