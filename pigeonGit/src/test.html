@@ -40,7 +40,7 @@
     Pigeon.receiveEvent("click",window,function(data){
 
         console.log("父窗口接到来自"+data.data.from+"窗口的事件"+j+++"次"+"原始事件类型"+data.data.eventType);
-    });
+    });  
     var k=1;
     PigeonIframe2.receiveEvent('mouseover',window,function(data){
         console.log("父窗口接到来自"+data.data.from+"窗口的事件"+k+++"次"+"原始事件类型"+data.data.eventType);
