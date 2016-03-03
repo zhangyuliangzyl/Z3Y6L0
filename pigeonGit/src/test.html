@@ -2,12 +2,13 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <title></title>
     <script src="pigeon.js"></script>
 
 </head>
 <body>
-<h1 id="id1">father frame</h1>
+<h1 id="id1">father frame 点击</h1>
 <iframe id="pigeon-iframe1" name="pigeon-iframe1" src="child_frame.html" frameborder="0" width="100%"></iframe>
 <iframe id="pigeon-iframe2" name="pigeon-iframe2" src="child_frame2.html" frameborder="0" width="100%"></iframe>
 
@@ -27,14 +28,14 @@
     });
 
     /*事件传递示例*/
-    /*如果存在两个以上的iframe，需要自定义各个ifrmae的name,并new一个新的Pigeon对象*/
+    /*如果存在两个以上的iframe，需要自定义各个ifrmaeName,需与<iframe>的name属性值一致，new一个新的Pigeon对象*/
     var PigeonIframe1=new Pigeon({iframeName:'pigeon-iframe1'});
     PigeonIframe1.reportEvent("scroll",window);
 
     var PigeonIframe2=new Pigeon({iframeName:'pigeon-iframe2'});
     PigeonIframe2.reportEvent("click",document.getElementById("id1"));
 
-    /*接收来自iframe的事件,可以不new新的对象，当然new一个还是比较好的，看着明显，事件来源在data.data.frome中，该值为iframeName*/
+    /*接收来自iframe的事件,可以不new新的对象，事件来源在data.data.frome中，该值为[iframeName]*/
     var j=1;
     Pigeon.receiveEvent("click",window,function(data){
 
