@@ -1,16 +1,29 @@
-
 /*
+  宽屏自动调高
   功能：根据背景图大小设置高度(宽屏图时候用)
   参数1：图片src
   参数2：要设置高度的jq节点	
 */
 function setWideImgHeight(src,jqDom){
-            var img = new Image();
-            img.src =src;
+        var img = new Image();
+        img.onload=function(){
             var imgHeight = img.height;
             $(jqDom).css("height",imgHeight);
+        };
+        img.src =src;
+    }
+function setWideImgs(imgList){
+    for(var i=0;i<imgList.length;i++) {
+        var jqDom = $(imgList[i]),
+            allUrl = jqDom.css("background-image");
+        var srcI=allUrl.substring(5,allUrl.length-2);
+        if(srcI.substring(0,1)=="t"){
+            srcI=allUrl.substring(4,allUrl.length-1);
         }
-
+        setWideImgHeight(srcI,jqDom);
+    }
+}
+//setWideImgs($(".wide_screen_box").find("p"))
 /*是否PC端
 *返回 true:是PC端，false:不是PC端
  */
